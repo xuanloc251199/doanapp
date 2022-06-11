@@ -25,15 +25,16 @@ const String FORGOT_PASSWORD = "Forgot Your Password?";
 const String CONTINUE_WITH = "Or Continue With";
 const String ERROR_LOGIN = "Faile Email or Password";
 const String LOADING = "Loading";
+const String DONT = "Don't have account? ";
 
 //SIGN UP
 const String SIGN_UP = "Create Account";
 const String SIGN_UP_TITLE = "Sign Up For Free";
-const String ALREADY_ACC = "already have an account?";
+const String ALREADY_ACC = "Already have an account?";
 const String USERNAME = "Anamwp . . ";
 const String KEEP_ME = "Keep Me Signed In";
 const String EMAIL_ME = "Email Me About Special Pricing";
-const String C_PASSWORD = "Nhập lại mật khẩu";
+const String C_PASSWORD = "Enter the password";
 const String ERROR_REGISTER = "Enter full information";
 const String ERROR_EMAIL = "This is wrong email";
 const String ERROR_PASSWORD = "Please enter at least 6 characters";

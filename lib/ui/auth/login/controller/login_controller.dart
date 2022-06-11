@@ -18,7 +18,6 @@ class LoginController extends GetxController {
 
   String KEY_NAME = "name";
 
-  late AuthRepositories _authRepositories;
   bool emailValid = false;
   bool passwordValid = false;
   final loginFormKey = GlobalKey<FormState>();

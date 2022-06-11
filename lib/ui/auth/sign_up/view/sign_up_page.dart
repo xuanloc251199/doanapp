@@ -1,4 +1,6 @@
 import 'package:daoan6/Pages/signup/signup_process_screen.dart';
+import 'package:daoan6/ui/auth/login/controller/login_controller.dart';
+import 'package:daoan6/ui/auth/login/view/login_page.dart';
 import 'package:daoan6/ui/auth/sign_up/controller/sign_up_controller.dart';
 import 'package:daoan6/values/colors.dart';
 import 'package:daoan6/values/dimen.dart';
@@ -18,7 +20,6 @@ import 'package:sizer/sizer.dart';
 
 class SignUpPage extends GetView<SignUpController> {
   SignUpPage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -53,7 +54,8 @@ class SignUpPage extends GetView<SignUpController> {
             Positioned(
               child: SingleChildScrollView(
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 8.0.w, vertical: 8.0.w),
                   child: Form(
                     key: controller.registerFormkey,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -175,13 +177,6 @@ class SignUpPage extends GetView<SignUpController> {
                           prefixIcon: Icons.lock,
                           prefixIconColor: mainDarkColor,
                         ),
-                        // Obx(
-                        //   () => controller.isLoading.value == true
-                        //       ? const Center(
-                        //           child: CircularProgressIndicator(),
-                        //         )
-                        //       : Text(""),
-                        // ),
                         TextFieldWidget(
                           textController: controller.cPasswordController,
                           invalid: controller.passwordValid,
@@ -270,21 +265,56 @@ class SignUpPage extends GetView<SignUpController> {
                         SizedBox(
                           height: 2.0.h,
                         ),
-                        Text(
-                          ALREADY_ACC,
-                          style: TextStyle(
-                              color: Color(0xFF53E88B),
-                              decoration: TextDecoration.underline),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              ALREADY_ACC,
+                              style: TextStyle(
+                                color: Color(0xFF000000),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 2.0.w,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Get.off(LoginPage());
+                              },
+                              child: Text(
+                                LOGIN,
+                                style: TextStyle(
+                                    color: Color(0xFF53E88B),
+                                    decoration: TextDecoration.underline),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
                   ),
                 ),
               ),
+            ),
+            Positioned(
+              child: Obx(
+                () => controller.isLoading.value == true
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : Text(""),
+              ),
             )
           ],
         ),
       ),
     );
+  }
+}
+
+class _Binding extends Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut<LoginController>(() => LoginController(), fenix: true);
   }
 }

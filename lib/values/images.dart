@@ -18,6 +18,7 @@ const String vegan = "assets/images/vegan.png";
 const String healthy = "assets/images/healthy.png";
 const String goodFood = "assets/images/good-food.png";
 const String greenNoddle = "assets/images/green-noddle.png";
+const String imgUrlBase = "assets/images/";
 //Home Page Icon
 const String ic_notifi = "assets/icons/ic_notification.png";
 const String ic_filter = "assets/icons/ic_filter.png";

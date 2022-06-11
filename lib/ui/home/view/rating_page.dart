@@ -1,3 +1,5 @@
+import 'package:daoan6/ui/home/controller/shop_controller.dart';
+import 'package:daoan6/ui/home/model/shop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:daoan6/ui/call/controller/call_controller.dart';
@@ -17,15 +19,16 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class RattingPage extends GetView<RatingController> {
-  final RestaurantEmblem res;
+  final Shop shop;
 
   const RattingPage({
     Key? key,
-    required this.res,
+    required this.shop,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final ShopController shopController = Get.put(ShopController());
     return GestureDetector(
       onTap: () {},
       child: GetBuilder<CallController>(
@@ -91,7 +94,7 @@ class RattingPage extends GetView<RatingController> {
                   backgroundColor: mainLightColor,
                   child: CircleAvatar(
                     radius: 75,
-                    backgroundImage: AssetImage(res.imgRes),
+                    backgroundImage: AssetImage(imgUrlBase + shop.avt),
                   ),
                 ),
                 SizedBox(

@@ -1,3 +1,4 @@
+import 'package:daoan6/ui/auth/login/view/login_page.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:daoan6/network_service/auth_services.dart';
@@ -82,7 +83,7 @@ class SignUpController extends GetxController {
           await storage.write(key: "name", value: data.user.name);
           await storage.write(key: "token", value: data.token);
           registerFormkey.currentState!.save();
-          Get.to(MainPage());
+          Get.to(LoginPage());
         } else {
           Get.snackbar("Register", "false");
         }

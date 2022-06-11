@@ -13,6 +13,7 @@ import 'package:daoan6/ui/call/controller/call_controller.dart';
 import 'package:daoan6/ui/cart/controller/cart_controller.dart';
 import 'package:daoan6/ui/chat/controller/chat_controller.dart';
 import 'package:daoan6/ui/chat/controller/chat_detail_controller.dart';
+import 'package:daoan6/ui/home/controller/detail_product_controller.dart';
 import 'package:daoan6/ui/home/controller/home_controller.dart';
 import 'package:daoan6/ui/home/controller/menu_controller.dart';
 import 'package:daoan6/ui/home/controller/notification_controller.dart';
@@ -20,6 +21,7 @@ import 'package:daoan6/ui/home/controller/rating_controller.dart';
 import 'package:daoan6/ui/home/controller/search_controller.dart';
 import 'package:daoan6/ui/home/controller/view_more_controller.dart';
 import 'package:daoan6/ui/home/controller/voucher_controller.dart';
+import 'package:daoan6/ui/home/view/detail_product_page.dart';
 import 'package:daoan6/ui/main/controller/main_controller.dart';
 import 'package:daoan6/ui/main/view/main_page.dart';
 import 'package:daoan6/ui/splash/controller/splash_controller.dart';
@@ -58,7 +60,7 @@ Widget _buildApp() => LayoutBuilder(builder: (context, constraints) {
             primaryColor: mainDarkColor,
           ),
           routes: routes,
-          home: SignUpPage(),
+          home: LoginPage(),
           initialBinding: _Binding(),
         );
       });
@@ -89,5 +91,7 @@ class _Binding extends Bindings {
     Get.lazyPut<RatingController>(() => RatingController(), fenix: true);
     Get.lazyPut<UserController>(() => UserController(), fenix: true);
     Get.lazyPut<CartController>(() => CartController(), fenix: true);
+    Get.lazyPut<DetailProductController>(() => DetailProductController(),
+        fenix: true);
   }
 }

@@ -1,3 +1,7 @@
+import 'package:daoan6/ui/home/controller/product_controller.dart';
+import 'package:daoan6/ui/home/controller/shop_controller.dart';
+import 'package:daoan6/ui/home/view/product_item.dart';
+import 'package:daoan6/ui/home/view/shop_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:daoan6/ui/home/controller/home_controller.dart';
@@ -44,6 +48,8 @@ class HomePage extends GetView<HomeController> {
   }
 
   Widget _buildBody() {
+    final ShopController shopController = Get.put(ShopController());
+    final ProductController productController = Get.put(ProductController());
     return Stack(
       children: [
         Positioned(
@@ -185,52 +191,24 @@ class HomePage extends GetView<HomeController> {
                         Container(
                           width: Get.width,
                           height: 30.0.h,
-                          child: ListView.builder(
-                            padding: EdgeInsets.symmetric(vertical: 10),
-                            itemCount: restaurantItem.length,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) => Container(
-                              margin: EdgeInsets.only(right: 24),
-                              child: NeuButtonWidget(
-                                width: 147,
-                                height: 184,
-                                radius: 22,
-                                onPressed: () {
-                                  Get.to(
-                                      RattingPage(res: restaurantItem[index]));
+                          child: Obx(() {
+                            if (shopController.isLoading.value) {
+                              return Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            } else {
+                              return ListView.builder(
+                                padding: EdgeInsets.symmetric(vertical: 10),
+                                itemCount: shopController.shopList.length,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  return ShopItem(
+                                    shop: shopController.shopList[index],
+                                  );
                                 },
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(restaurantItem[index].imgRes),
-                                    SizedBox(height: 2.0.w),
-                                    Text(
-                                      restaurantItem[index].nameRes,
-                                      style: TextStyle(
-                                        color: textBlackColor,
-                                        fontFamily: robotoRegular,
-                                        fontSize: normalSize,
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    SizedBox(
-                                      height: 1.5.w,
-                                    ),
-                                    Text(
-                                      restaurantItem[index].time,
-                                      style: TextStyle(
-                                        color: textGreyColor,
-                                        fontFamily: robotoRegular,
-                                        fontSize: smallMediumSize,
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
+                              );
+                            }
+                          }),
                         ),
                       ],
                     ),
@@ -275,86 +253,28 @@ class HomePage extends GetView<HomeController> {
                         Container(
                           width: Get.width,
                           height: Get.height,
-                          child: ListView.builder(
-                            padding: EdgeInsets.symmetric(vertical: 10),
-                            itemCount: menuItem.length,
-                            scrollDirection: Axis.vertical,
-                            itemBuilder: (context, i) => Container(
-                              margin: EdgeInsets.only(bottom: 24),
-                              child: NeuButtonWidget(
-                                width: Get.width,
-                                height: 87,
-                                radius: 22,
-                                child: Container(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 5.0.w),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Container(
-                                            width: 64,
-                                            height: 64,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10)),
-                                            child: Image.asset(
-                                              menuItem[i].imgMenu,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 3.0.w,
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                menuItem[i].nameMenu,
-                                                style: TextStyle(
-                                                  color: textBlackColor,
-                                                  fontFamily: robotoRegular,
-                                                  fontSize: normalSize,
-                                                ),
-                                                textAlign: TextAlign.center,
-                                              ),
-                                              SizedBox(
-                                                height: 1.5.w,
-                                              ),
-                                              Text(
-                                                menuItem[i].nameRes,
-                                                style: TextStyle(
-                                                  color: textGreyColor,
-                                                  fontFamily: robotoRegular,
-                                                  fontSize: smallMediumSize,
-                                                ),
-                                                textAlign: TextAlign.center,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      Text(
-                                        menuItem[i].price,
-                                        style: TextStyle(
-                                          color: textOrangeColor,
-                                          fontFamily: robotoRegular,
-                                          fontSize: largeSize,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
+                          child: Obx(
+                            () {
+                              if (shopController.isLoading.value) {
+                                return Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              } else {
+                                return ListView.builder(
+                                  padding: EdgeInsets.symmetric(vertical: 10),
+                                  itemCount:
+                                      productController.productList.length,
+                                  scrollDirection: Axis.vertical,
+                                  itemBuilder: (context, index) {
+                                    return ProductItem(
+                                      product:
+                                          productController.productList[index],
+                                      shop: shopController.shopList[index],
+                                    );
+                                  },
+                                );
+                              }
+                            },
                           ),
                         ),
                       ],

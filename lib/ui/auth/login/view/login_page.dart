@@ -22,7 +22,7 @@ import 'package:sizer/sizer.dart';
 
 class LoginPage extends GetView<LoginController> {
   LoginPage({Key? key}) : super(key: key);
-  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -58,6 +58,15 @@ class LoginPage extends GetView<LoginController> {
               child: SingleChildScrollView(
                 child: _buildInputForm(),
               ),
+            ),
+            Positioned(
+              child: Obx(
+                () => controller.isLoading.value == true
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : Text(""),
+              ),
             )
           ],
         ),
@@ -66,10 +75,6 @@ class LoginPage extends GetView<LoginController> {
   }
 
   Widget _buildInputForm() {
-    var _emailTextController = TextEditingController(text: "");
-    var _passwordTextController = TextEditingController(text: "");
-    var _passwordVisible = false;
-
     return Form(
       key: controller.loginFormKey,
       child: Column(
@@ -119,7 +124,7 @@ class LoginPage extends GetView<LoginController> {
                   height: 57.0,
                   textController: controller.emailController,
                   validator: (v) {
-                    return controller.validatePassword(v!);
+                    return controller.validateEmail(v!);
                   },
                   onSaved: (v) {
                     controller.password = v!;
@@ -261,6 +266,22 @@ class LoginPage extends GetView<LoginController> {
                       color: Color(0xFF53E88B),
                       decoration: TextDecoration.underline),
                 ),
+                SizedBox(
+                  height: 2.0.h,
+                ),
+
+                GestureDetector(
+                  onTap: () {
+                    Get.offAll(SignUpPage());
+                  },
+                  child: Text(
+                    SIGN_UP,
+                    style: TextStyle(
+                        color: Color(0xFF53E88B),
+                        decoration: TextDecoration.underline),
+                  ),
+                ),
+
                 SizedBox(
                   height: 4.0.h,
                 ),
