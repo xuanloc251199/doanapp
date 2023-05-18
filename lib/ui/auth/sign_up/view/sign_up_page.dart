@@ -28,7 +28,9 @@ class SignUpPage extends GetView<SignUpController> {
         builder: (value) => AnnotatedRegion(
           child: Scaffold(
             resizeToAvoidBottomInset: false,
-            body: _buildBody(),
+            body: GestureDetector(
+                onTap: () => FocusScope.of(context).unfocus(),
+                child: _buildBody()),
           ),
           value: SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,

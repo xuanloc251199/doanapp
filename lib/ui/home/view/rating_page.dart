@@ -189,7 +189,7 @@ class RattingPage extends GetView<RatingController> {
                       linearGradient: LinearGradient(
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
-                        colors: [greyLightColor, greyDarktColor],
+                        colors: [greyLightColor, greyDarkColor],
                       ),
                     )
                   ],

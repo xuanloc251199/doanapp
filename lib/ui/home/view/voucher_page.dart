@@ -65,7 +65,7 @@ class VoucherPage extends GetView<VoucherController> {
                         height: 50,
                         bgButton: orangeLightColor,
                         child: Center(
-                          child: Container(
+                          child: SizedBox(
                             width: 20,
                             height: 20,
                             child: Image.asset(

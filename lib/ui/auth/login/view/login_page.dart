@@ -1,3 +1,4 @@
+import 'package:daoan6/constants.dart';
 import 'package:daoan6/ui/auth/login/controller/login_controller.dart';
 import 'package:daoan6/ui/auth/sign_up/view/sign_up_page.dart';
 import 'package:daoan6/values/colors.dart';
@@ -16,6 +17,8 @@ import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../../widget/text_customized.dart';
+
 class LoginPage extends GetView<LoginController> {
   LoginPage({Key? key}) : super(key: key);
 
@@ -27,7 +30,10 @@ class LoginPage extends GetView<LoginController> {
         builder: (value) => AnnotatedRegion(
           child: Scaffold(
             resizeToAvoidBottomInset: false,
-            body: _buildBody(),
+            body: GestureDetector(
+              onTap: () => FocusScope.of(context).unfocus(),
+              child: _buildBody(),
+            ),
           ),
           value: SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
@@ -43,7 +49,7 @@ class LoginPage extends GetView<LoginController> {
       body: SafeArea(
         child: Stack(
           children: [
-            Positioned(
+            const Positioned(
               right: 0,
               top: 0,
               child: BgView(
@@ -72,9 +78,10 @@ class LoginPage extends GetView<LoginController> {
 
   Widget _buildInputForm() {
     return Form(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       key: controller.loginFormKey,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
@@ -83,6 +90,9 @@ class LoginPage extends GetView<LoginController> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                SizedBox(
+                  height: 5.0.h,
+                ),
                 Image.asset(
                   logoApp,
                 ),
@@ -90,34 +100,26 @@ class LoginPage extends GetView<LoginController> {
                   name_app,
                   style: TextStyle(
                     fontFamily: vigaRegular,
-                    color: mainLightColor,
+                    color: mainDarkColor,
                     fontWeight: FontWeight.w500,
                     fontSize: largeSize,
                   ),
                 ),
-                Text(
-                  slogan_app,
-                  style: TextStyle(
-                    fontFamily: semiMedium,
-                    color: textBlackColor,
-                    fontSize: smallMediumSize,
-                  ),
-                ),
                 SizedBox(
-                  height: 5.0.h,
+                  height: 2.0.w,
                 ),
                 Text(
                   LOGIN_TITLE,
                   style: TextStyle(
-                    fontSize: mediumSize,
+                    fontSize: largeSize,
                   ),
                 ),
                 SizedBox(
-                  height: 5.0.h,
+                  height: 5.0.w,
                 ),
                 TextFieldWidget(
                   width: Get.width,
-                  height: 57.0,
+                  height: 10.0.h,
                   textController: controller.emailController,
                   validator: (v) {
                     return controller.validateEmail(v!);
@@ -125,11 +127,16 @@ class LoginPage extends GetView<LoginController> {
                   onSaved: (v) {
                     controller.password = v!;
                   },
+                  widthBorder: 1,
                   bgColor: bgWhiteColor,
                   hint: EMAIL,
-                  hintTextStytle: hintTextStyle,
-                  borderColor: textGreyColor,
-                  inputBoxShadow: BoxShadow(
+                  hintTextStytle: TextStyle(
+                    color: greyDarkColor,
+                    fontSize: 15.sp,
+                    fontFamily: robotoRegular,
+                  ),
+                  borderColor: mainDarkColor,
+                  inputBoxShadow: const BoxShadow(
                     color: shadowColor,
                     offset: Offset(15, 20),
                     blurRadius: 45,
@@ -137,25 +144,25 @@ class LoginPage extends GetView<LoginController> {
                   ),
                   isEnable: true,
                 ),
-                // controller.emailValid
-                //     ? Container(
-                //         padding: EdgeInsets.only(top: 2.0.h),
-                //         child: Row(
-                //           crossAxisAlignment: CrossAxisAlignment.start,
-                //           children: [
-                //             TextCustomized(
-                //               text: controller.error,
-                //               weight: FontWeight.w500,
-                //               font: robotoRegular,
-                //               color: mainDarkColor,
-                //               size: verySmallSize,
-                //               textAlign: TextAlign.left,
-                //             )
-                //           ],
-                //         ))
-                //     : Container(),
+                controller.emailValid
+                    ? Container(
+                        padding: EdgeInsets.only(top: 2.0.h),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextCustomized(
+                              text: controller.error,
+                              weight: FontWeight.w500,
+                              font: robotoRegular,
+                              color: mainDarkColor,
+                              size: verySmallSize,
+                              textAlign: TextAlign.left,
+                            )
+                          ],
+                        ))
+                    : Container(),
                 SizedBox(
-                  height: 2.0.h,
+                  height: 0.5.w,
                 ),
                 TextFieldWidget(
                   width: Get.width,
@@ -167,13 +174,18 @@ class LoginPage extends GetView<LoginController> {
                   onSaved: (v) {
                     controller.password = v!;
                   },
+                  widthBorder: 1.5,
                   bgColor: bgWhiteColor,
                   hint: PASSWORD,
                   textInputType: TextInputType.visiblePassword,
                   isObscureText: true,
-                  hintTextStytle: hintTextStyle,
-                  borderColor: textGreyColor,
-                  inputBoxShadow: BoxShadow(
+                  hintTextStytle: TextStyle(
+                    color: greyDarkColor,
+                    fontSize: 15.sp,
+                    fontFamily: robotoRegular,
+                  ),
+                  borderColor: mainDarkColor,
+                  inputBoxShadow: const BoxShadow(
                     color: shadowColor,
                     offset: Offset(15, 20),
                     blurRadius: 45,
@@ -182,14 +194,14 @@ class LoginPage extends GetView<LoginController> {
                   isEnable: true,
                 ),
                 SizedBox(
-                  height: 2.0.h,
+                  height: 3.0.h,
                 ),
-                Text(
+                const Text(
                   CONTINUE_WITH,
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
-                  height: 2.0.h,
+                  height: 3.0.h,
                 ),
                 Container(
                   width: Get.width,
@@ -254,32 +266,31 @@ class LoginPage extends GetView<LoginController> {
                   ),
                 ),
                 SizedBox(
-                  height: 2.0.h,
+                  height: 5.0.h,
                 ),
-                Text(
+                const Text(
                   FORGOT_PASSWORD,
                   style: TextStyle(
-                      color: Color(0xFF53E88B),
+                      color: mainDarkColor,
                       decoration: TextDecoration.underline),
                 ),
                 SizedBox(
                   height: 2.0.h,
                 ),
-
                 GestureDetector(
                   onTap: () {
                     Get.offAll(SignUpPage());
                   },
-                  child: Text(
+                  child: const Text(
                     SIGN_UP,
                     style: TextStyle(
-                        color: Color(0xFF53E88B),
-                        decoration: TextDecoration.underline),
+                      color: mainDarkColor,
+                      decoration: TextDecoration.underline,
+                    ),
                   ),
                 ),
-
                 SizedBox(
-                  height: 4.0.h,
+                  height: 5.0.h,
                 ),
                 ButtonGradientWidget(
                   toUpperCase: true,

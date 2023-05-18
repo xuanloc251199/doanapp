@@ -88,8 +88,8 @@ class SpecialButtonWidget extends StatelessWidget {
                             activity!,
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontFamily: robotoRegular,
-                              fontSize: verySmallSize,
+                              fontFamily: robotoBold,
+                              fontSize: normalXSize,
                               color: textActivityColor ?? mainLightColor,
                             ),
                           ),

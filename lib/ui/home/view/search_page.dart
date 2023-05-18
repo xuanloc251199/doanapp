@@ -1,3 +1,4 @@
+import 'package:daoan6/values/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:daoan6/ui/home/controller/home_controller.dart';
@@ -15,6 +16,8 @@ import 'package:daoan6/widget/text_field_widget.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import 'notification_page.dart';
+
 class SearchPage extends GetView<SearchController> {
   const SearchPage({Key? key}) : super(key: key);
 
@@ -26,7 +29,10 @@ class SearchPage extends GetView<SearchController> {
         builder: (value) => AnnotatedRegion(
             child: Scaffold(
               resizeToAvoidBottomInset: false,
-              body: _buildBody(),
+              body: GestureDetector(
+                onTap: () => FocusScope.of(context).unfocus(),
+                child: _buildBody(),
+              ),
             ),
             value: SystemUiOverlayStyle(
               statusBarColor: Colors.transparent,
@@ -70,7 +76,7 @@ class SearchPage extends GetView<SearchController> {
                           TITLE_HOME_PAGE,
                           style: TextStyle(
                             fontFamily: robotoRegular,
-                            fontSize: largeMediumSize,
+                            fontSize: largeSize,
                             height: normalLineSpacing,
                           ),
                         ),
@@ -84,6 +90,9 @@ class SearchPage extends GetView<SearchController> {
                               color: mainDarkColor,
                             ),
                           ),
+                          onPressed: () {
+                            Get.to(NotificationPage());
+                          },
                         ),
                       ],
                     ),
@@ -98,8 +107,9 @@ class SearchPage extends GetView<SearchController> {
                       width: Get.width,
                       height: 50,
                       prefixIcon: Icons.search,
-                      prefixIconColor: orangeDarkColor,
+                      prefixIconColor: greyDarkColor,
                       hint: HINT_SEARCH_TEXT,
+                      hintTextStytle: hintTextStyle,
                       radius: 15,
                     ),
                   ),
@@ -135,7 +145,7 @@ class SearchPage extends GetView<SearchController> {
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontFamily: robotoRegular,
-                                    fontSize: smallMediumSize,
+                                    fontSize: medium15Size,
                                     color: textOrangeColor,
                                   ),
                                 ),
@@ -156,7 +166,7 @@ class SearchPage extends GetView<SearchController> {
                                   style: TextStyle(
                                     fontFamily: robotoRegular,
                                     color: textOrangeColor,
-                                    fontSize: smallMediumSize,
+                                    fontSize: medium15Size,
                                   ),
                                 ),
                               ),
@@ -198,7 +208,7 @@ class SearchPage extends GetView<SearchController> {
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontFamily: robotoRegular,
-                                    fontSize: smallMediumSize,
+                                    fontSize: medium15Size,
                                     color: textOrangeColor,
                                   ),
                                 ),
@@ -219,7 +229,7 @@ class SearchPage extends GetView<SearchController> {
                                   style: TextStyle(
                                     fontFamily: robotoRegular,
                                     color: textOrangeColor,
-                                    fontSize: smallMediumSize,
+                                    fontSize: medium15Size,
                                   ),
                                 ),
                               ),
@@ -239,7 +249,7 @@ class SearchPage extends GetView<SearchController> {
                                   style: TextStyle(
                                     fontFamily: robotoRegular,
                                     color: textOrangeColor,
-                                    fontSize: smallMediumSize,
+                                    fontSize: medium15Size,
                                   ),
                                 ),
                               ),
@@ -281,7 +291,7 @@ class SearchPage extends GetView<SearchController> {
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontFamily: robotoRegular,
-                                    fontSize: smallMediumSize,
+                                    fontSize: medium15Size,
                                     color: textOrangeColor,
                                   ),
                                 ),
@@ -302,7 +312,7 @@ class SearchPage extends GetView<SearchController> {
                                   style: TextStyle(
                                     fontFamily: robotoRegular,
                                     color: textOrangeColor,
-                                    fontSize: smallMediumSize,
+                                    fontSize: medium15Size,
                                   ),
                                 ),
                               ),
@@ -322,7 +332,7 @@ class SearchPage extends GetView<SearchController> {
                                   style: TextStyle(
                                     fontFamily: robotoRegular,
                                     color: textOrangeColor,
-                                    fontSize: smallMediumSize,
+                                    fontSize: medium15Size,
                                   ),
                                 ),
                               ),
@@ -346,7 +356,7 @@ class SearchPage extends GetView<SearchController> {
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontFamily: robotoRegular,
-                                    fontSize: smallMediumSize,
+                                    fontSize: medium15Size,
                                     color: textOrangeColor,
                                   ),
                                 ),
@@ -367,7 +377,7 @@ class SearchPage extends GetView<SearchController> {
                                   style: TextStyle(
                                     fontFamily: robotoRegular,
                                     color: textOrangeColor,
-                                    fontSize: smallMediumSize,
+                                    fontSize: medium15Size,
                                   ),
                                 ),
                               ),
@@ -395,7 +405,7 @@ class SearchPage extends GetView<SearchController> {
                         style: TextStyle(
                           fontFamily: robotoRegular,
                           color: textWhiteColor,
-                          fontSize: normalXSize,
+                          fontSize: mediumSize,
                         ),
                       ),
                     ),

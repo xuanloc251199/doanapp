@@ -50,7 +50,7 @@ class NeuButtonWidget extends StatelessWidget {
           color: bgButton ?? bgWhiteColor,
           border: isBorder == true
               ? Border.all(
-                  color: borderColor ?? greyDarktColor,
+                  color: borderColor ?? greyDarkColor,
                   width: 1,
                 )
               : null,

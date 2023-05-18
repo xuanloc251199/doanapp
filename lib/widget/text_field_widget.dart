@@ -1,12 +1,12 @@
+import 'package:daoan6/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:daoan6/values/colors.dart';
-import 'package:daoan6/values/dimen.dart';
-import 'package:daoan6/values/fonts.dart';
-import 'package:daoan6/values/styles.dart';
+import '../values/colors.dart';
+import '../values/styles.dart';
 
 class TextFieldWidget extends StatefulWidget {
   final String? title;
   final String? hint;
+  final double? widthBorder;
   final TextEditingController? textController;
   final TextInputAction? textAction;
   final IconData? prefixIcon;
@@ -22,9 +22,11 @@ class TextFieldWidget extends StatefulWidget {
   final Color? suffixIconColor;
   final double width;
   final double height;
+  final double? hintPadding;
   final Color? bgColor;
   final BorderSide? enableBorder;
   final TextStyle? hintTextStytle;
+  final TextStyle? inputTextStytle;
   final BoxShadow? inputBoxShadow;
   final bool isEnable;
   final bool? isPrefix;
@@ -37,6 +39,7 @@ class TextFieldWidget extends StatefulWidget {
     Key? key,
     this.title,
     this.hint,
+    this.widthBorder,
     this.textController,
     this.textAction,
     this.prefixIcon,
@@ -53,6 +56,7 @@ class TextFieldWidget extends StatefulWidget {
     this.borderEnableColor,
     this.enableBorder,
     this.hintTextStytle,
+    this.inputTextStytle,
     this.inputBoxShadow,
     required this.isEnable,
     this.isPrefix,
@@ -62,6 +66,7 @@ class TextFieldWidget extends StatefulWidget {
     this.validator,
     this.invalid,
     this.isObscureText,
+    this.hintPadding,
   }) : super(key: key);
 
   @override
@@ -91,6 +96,9 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
             focusNode: widget.focusNode,
             textAlign: TextAlign.start,
             decoration: InputDecoration(
+                hintMaxLines: 1,
+                contentPadding: EdgeInsets.symmetric(
+                    horizontal: widget.hintPadding ?? 15.0),
                 hintText: widget.hint,
                 hintStyle: widget.hintTextStytle ?? inputHintTextStyle,
                 prefixIcon: widget.isPrefix == true
@@ -108,8 +116,8 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(widget.radius ?? 15),
                   borderSide: BorderSide(
-                    color: widget.borderColor ?? orangeDarkColor,
-                    width: 0.5,
+                    color: widget.borderColor ?? kPrimaryColor,
+                    width: widget.widthBorder ?? 0.5,
                   ),
                 ),
                 enabledBorder: widget.isEnable == true
@@ -117,8 +125,8 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                         borderRadius:
                             BorderRadius.circular(widget.radius ?? 15),
                         borderSide: BorderSide(
-                          color: widget.borderEnableColor ?? greyDarktColor,
-                          width: 0.5,
+                          color: widget.borderEnableColor ?? greyDarkColor,
+                          width: widget.widthBorder ?? 0.5,
                         ),
                       )
                     : null,

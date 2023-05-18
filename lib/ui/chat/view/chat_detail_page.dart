@@ -240,7 +240,7 @@ class ChatDetailPage extends GetView<ChatDetailController> {
                                             end: Alignment.centerRight,
                                             colors: [
                                               greyLightColor,
-                                              greyDarktColor,
+                                              greyDarkColor,
                                             ],
                                           )
                                         : null,

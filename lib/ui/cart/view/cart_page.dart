@@ -67,7 +67,7 @@ class CartPage extends GetView<CartController> {
                               TITLE_HOME_PAGE,
                               style: TextStyle(
                                 fontFamily: robotoRegular,
-                                fontSize: largeMediumSize,
+                                fontSize: largeSize,
                                 height: normalLineSpacing,
                               ),
                             ),
@@ -102,6 +102,11 @@ class CartPage extends GetView<CartController> {
                                 prefixIcon: Icons.search,
                                 prefixIconColor: orangeDarkColor,
                                 hint: HINT_SEARCH_TEXT,
+                                hintTextStytle: TextStyle(
+                                  color: greyDarkColor,
+                                  fontSize: 18.sp,
+                                  fontFamily: robotoRegular,
+                                ),
                                 radius: 15,
                                 inputBoxShadow: BoxShadow(
                                   color: shadowColor,

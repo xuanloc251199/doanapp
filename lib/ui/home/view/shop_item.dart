@@ -1,3 +1,4 @@
+import 'package:daoan6/constants.dart';
 import 'package:daoan6/ui/home/model/shop.dart';
 import 'package:daoan6/values/colors.dart';
 import 'package:daoan6/values/dimen.dart';
@@ -38,9 +39,9 @@ class ShopItem extends StatelessWidget {
             Text(
               shop.name,
               style: TextStyle(
-                color: textBlackColor,
+                color: kPrimaryColor,
                 fontFamily: robotoRegular,
-                fontSize: normalSize,
+                fontSize: mediumSize,
               ),
               textAlign: TextAlign.center,
             ),
@@ -52,7 +53,7 @@ class ShopItem extends StatelessWidget {
               style: TextStyle(
                 color: textGreyColor,
                 fontFamily: robotoRegular,
-                fontSize: smallMediumSize,
+                fontSize: normalSize,
               ),
               textAlign: TextAlign.center,
             ),

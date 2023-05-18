@@ -63,7 +63,7 @@ class ProductItem extends StatelessWidget {
                         style: TextStyle(
                           color: textBlackColor,
                           fontFamily: robotoRegular,
-                          fontSize: normalSize,
+                          fontSize: mediumSize,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -75,7 +75,7 @@ class ProductItem extends StatelessWidget {
                         style: TextStyle(
                           color: textGreyColor,
                           fontFamily: robotoRegular,
-                          fontSize: smallMediumSize,
+                          fontSize: normalSize,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -87,8 +87,8 @@ class ProductItem extends StatelessWidget {
                 product.price.toString(),
                 style: TextStyle(
                   color: textOrangeColor,
-                  fontFamily: robotoRegular,
-                  fontSize: largeSize,
+                  fontFamily: robotoBold,
+                  fontSize: mediumXSize,
                 ),
                 textAlign: TextAlign.center,
               ),

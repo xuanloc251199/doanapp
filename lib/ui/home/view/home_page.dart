@@ -1,3 +1,4 @@
+import 'package:daoan6/constants.dart';
 import 'package:daoan6/ui/home/controller/product_controller.dart';
 import 'package:daoan6/ui/home/controller/shop_controller.dart';
 import 'package:daoan6/ui/home/view/product_item.dart';
@@ -36,7 +37,10 @@ class HomePage extends GetView<HomeController> {
         builder: (value) => AnnotatedRegion(
           child: Scaffold(
             resizeToAvoidBottomInset: false,
-            body: _buildBody(),
+            body: GestureDetector(
+              onTap: () => FocusScope.of(context).unfocus(),
+              child: _buildBody(),
+            ),
           ),
           value: SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
@@ -50,211 +54,155 @@ class HomePage extends GetView<HomeController> {
   Widget _buildBody() {
     final ShopController shopController = Get.put(ShopController());
     final ProductController productController = Get.put(ProductController());
-    return Stack(
-      children: [
-        Positioned(
-          right: 0,
-          top: 0,
-          child: BgView1(),
-        ),
-        Positioned(
-          child: SingleChildScrollView(
-            child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 8.0.w),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(
-                    height: 8.0.w,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        TITLE_HOME_PAGE,
-                        style: TextStyle(
-                          fontFamily: robotoRegular,
-                          fontSize: largeMediumSize,
-                          height: normalLineSpacing,
-                        ),
-                      ),
-                      NeuButtonWidget(
-                        width: 50,
-                        height: 50,
-                        child: Center(
-                          child: Icon(
-                            Icons.notifications_none,
-                            size: 30,
-                            color: mainDarkColor,
-                          ),
-                        ),
-                        onPressed: () {
-                          Get.to(NotificationPage());
-                        },
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 5.0.w,
-                  ),
-                  Container(
-                    width: Get.width,
-                    child: Row(
+    return SafeArea(
+      child: Stack(
+        children: [
+          Positioned(
+            right: 0,
+            top: 0,
+            child: BgView1(),
+          ),
+          Positioned(
+            child: SingleChildScrollView(
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 8.0.w),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(
+                      height: 8.0.w,
+                    ),
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        TextFieldWidget(
-                          isEnable: false,
-                          width: 66.0.w,
-                          height: 50,
-                          prefixIcon: Icons.search,
-                          prefixIconColor: orangeDarkColor,
-                          hint: HINT_SEARCH_TEXT,
-                          radius: 15,
-                          inputBoxShadow: BoxShadow(
-                            color: shadowColor,
-                            offset: Offset(15, 20),
-                            blurRadius: 45,
-                            spreadRadius: 0.1,
+                        Text(
+                          TITLE_HOME_PAGE,
+                          style: TextStyle(
+                            fontFamily: robotoRegular,
+                            fontSize: largeSize,
+                            height: normalLineSpacing,
                           ),
                         ),
                         NeuButtonWidget(
                           width: 50,
                           height: 50,
-                          bgButton: orangeLightColor,
                           child: Center(
-                            child: Container(
-                              width: 20,
-                              height: 20,
-                              child: Image.asset(
-                                ic_filter,
-                              ),
+                            child: Icon(
+                              Icons.notifications_none,
+                              size: 30,
+                              color: mainDarkColor,
                             ),
                           ),
                           onPressed: () {
-                            Get.to(SearchPage());
+                            Get.to(NotificationPage());
                           },
-                        )
+                        ),
                       ],
                     ),
-                  ),
-                  SizedBox(
-                    height: 5.0.w,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Get.to(VoucherPage());
-                    },
-                    child: SpecialButtonWidget(
-                      width: Get.width,
-                      height: 122,
-                      bgImage: bgAdver,
-                      title: TITLE_AD,
-                      activity: BUY_NOW,
-                      onPressed: () {},
+                    SizedBox(
+                      height: 5.0.w,
                     ),
-                  ),
-                  Container(
-                    width: Get.width,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              NEAREST_RES,
-                              style: TextStyle(
-                                color: textBlackColor,
-                                fontFamily: robotoRegular,
-                                fontSize: normalXSize,
-                              ),
+                    Container(
+                      width: Get.width,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          TextFieldWidget(
+                            isEnable: false,
+                            width: 66.0.w,
+                            height: 50,
+                            prefixIcon: Icons.search,
+                            prefixIconColor: kPrimaryColor,
+                            hint: HINT_SEARCH_TEXT,
+                            hintTextStytle: TextStyle(
+                              color: textGreyColor,
+                              fontSize: mediumSize,
+                              fontFamily: robotoRegular,
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                Get.to(
-                                  ViewMorePage(),
-                                );
-                              },
-                              child: Text(
-                                VIEW_MORE,
-                                style: TextStyle(
-                                  color: textOrangeColor,
-                                  fontFamily: robotoRegular,
-                                  fontSize: smallMediumSize,
+                            radius: 15,
+                            widthBorder: 1.5,
+                            inputBoxShadow: const BoxShadow(
+                              color: shadowColor,
+                              offset: Offset(15, 20),
+                              blurRadius: 45,
+                              spreadRadius: 0.1,
+                            ),
+                          ),
+                          NeuButtonWidget(
+                            width: 50,
+                            height: 50,
+                            bgButton: orangeLightColor,
+                            child: Center(
+                              child: Container(
+                                width: 20,
+                                height: 20,
+                                child: Image.asset(
+                                  ic_filter,
                                 ),
                               ),
                             ),
-                          ],
-                        ),
-                        Container(
-                          width: Get.width,
-                          height: 30.0.h,
-                          child: Obx(() {
-                            if (shopController.isLoading.value) {
-                              return Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            } else {
-                              return ListView.builder(
-                                padding: EdgeInsets.symmetric(vertical: 10),
-                                itemCount: shopController.shopList.length,
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, index) {
-                                  return ShopItem(
-                                    shop: shopController.shopList[index],
+                            onPressed: () {
+                              Get.to(SearchPage());
+                            },
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5.0.w,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(const VoucherPage());
+                      },
+                      child: SpecialButtonWidget(
+                        width: Get.width,
+                        height: 122,
+                        bgImage: bgAdver,
+                        title: TITLE_AD,
+                        activity: BUY_NOW,
+                        onPressed: () {},
+                      ),
+                    ),
+                    Container(
+                      width: Get.width,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                NEAREST_RES,
+                                style: TextStyle(
+                                  color: textBlackColor,
+                                  fontFamily: robotoRegular,
+                                  fontSize: mediumSize,
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Get.to(
+                                    ViewMorePage(),
                                   );
                                 },
-                              );
-                            }
-                          }),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 5.0.w,
-                  ),
-                  Container(
-                    width: Get.width,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              POPULAR_MENU,
-                              style: TextStyle(
-                                color: textBlackColor,
-                                fontFamily: robotoRegular,
-                                fontSize: normalXSize,
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Get.to(MenuPage());
-                              },
-                              child: Text(
-                                VIEW_MORE,
-                                style: TextStyle(
-                                  color: textOrangeColor,
-                                  fontFamily: robotoRegular,
-                                  fontSize: smallMediumSize,
+                                child: Text(
+                                  VIEW_MORE,
+                                  style: TextStyle(
+                                    color: textOrangeColor,
+                                    fontFamily: robotoRegular,
+                                    fontSize: normalXSize,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 3.0.w,
-                        ),
-                        Container(
-                          width: Get.width,
-                          height: Get.height,
-                          child: Obx(
-                            () {
+                            ],
+                          ),
+                          Container(
+                            width: Get.width,
+                            height: 30.0.h,
+                            child: Obx(() {
                               if (shopController.isLoading.value) {
                                 return Center(
                                   child: CircularProgressIndicator(),
@@ -262,30 +210,94 @@ class HomePage extends GetView<HomeController> {
                               } else {
                                 return ListView.builder(
                                   padding: EdgeInsets.symmetric(vertical: 10),
-                                  itemCount:
-                                      productController.productList.length,
-                                  scrollDirection: Axis.vertical,
+                                  itemCount: shopController.shopList.length,
+                                  scrollDirection: Axis.horizontal,
                                   itemBuilder: (context, index) {
-                                    return ProductItem(
-                                      product:
-                                          productController.productList[index],
+                                    return ShopItem(
                                       shop: shopController.shopList[index],
                                     );
                                   },
                                 );
                               }
-                            },
+                            }),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  )
-                ],
+                    SizedBox(
+                      height: 5.0.w,
+                    ),
+                    Container(
+                      width: Get.width,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                POPULAR_MENU,
+                                style: TextStyle(
+                                  color: textBlackColor,
+                                  fontFamily: robotoRegular,
+                                  fontSize: normalXSize,
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Get.to(MenuPage());
+                                },
+                                child: Text(
+                                  VIEW_MORE,
+                                  style: TextStyle(
+                                    color: textOrangeColor,
+                                    fontFamily: robotoRegular,
+                                    fontSize: smallMediumSize,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 3.0.w,
+                          ),
+                          Container(
+                            width: Get.width,
+                            height: Get.height,
+                            child: Obx(
+                              () {
+                                if (shopController.isLoading.value) {
+                                  return Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                } else {
+                                  return ListView.builder(
+                                    padding: EdgeInsets.symmetric(vertical: 10),
+                                    itemCount:
+                                        productController.productList.length,
+                                    scrollDirection: Axis.vertical,
+                                    itemBuilder: (context, index) {
+                                      return ProductItem(
+                                        product: productController
+                                            .productList[index],
+                                        shop: shopController.shopList[index],
+                                      );
+                                    },
+                                  );
+                                }
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 }
